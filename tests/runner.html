@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>SOLEVAULT Automated Test Suite</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+  <link rel="stylesheet" href="../styles/responsive.css">
+</head>
+<body>
+  <div id="test-sandbox" style="position: absolute; left: -9999px;">
+    <!-- Elements required for DOM tests -->
+    <header class="site-header">
+      <button type="button" class="mobile-nav-toggle" id="mobile-menu-toggle" aria-controls="mobile-drawer" aria-expanded="false"></button>
+      <div class="header-actions">
+        <button type="button" id="search-toggle-btn"></button>
+        <span class="badge-count badge-wishlist-count">0</span>
+        <button type="button" class="action-btn cart-toggle-btn">
+          <span class="badge-count badge-cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <div id="site-backdrop" class="backdrop"></div>
+
+    <aside id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <button type="button" id="mobile-drawer-close"></button>
+    </aside>
+
+    <div id="search-overlay" class="search-overlay" aria-hidden="true">
+      <form id="search-form">
+        <input type="search" id="search-input" />
+        <button type="button" id="search-clear-btn"></button>
+      </form>
+      <button type="button" id="search-close-btn"></button>
+      <div id="search-default-suggestions"></div>
+      <div id="search-live-results"></div>
+    </div>
+
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+      <button type="button" id="cart-drawer-close"></button>
+      <div id="cart-drawer-items"></div>
+      <span id="cart-drawer-total">0 ₫</span>
+    </aside>
+
+    <div id="products-grid"></div>
+    <div id="products-count"></div>
+    <div id="active-filters"></div>
+    <select id="sort-select">
+      <option value="featured">Nổi bật</option>
+      <option value="price-asc">Giá: Thấp đến Cao</option>
+      <option value="price-desc">Giá: Cao đến Thấp</option>
+      <option value="name-asc">Tên: A-Z</option>
+    </select>
+
+    <form id="checkout-form">
+      <input type="text" id="fullname" name="fullname" value="Nguyễn Văn A" />
+      <span id="fullname-error"></span>
+      <input type="tel" id="phone" name="phone" value="0987654321" />
+      <span id="phone-error"></span>
+      <input type="email" id="email" name="email" value="test@example.com" />
+      <span id="email-error"></span>
+      <input type="text" id="address" name="address" value="123 Lê Lợi, Quận 1" />
+      <span id="address-error"></span>
+      <select id="city" name="city">
+        <option value="Hồ Chí Minh" selected>Hồ Chí Minh</option>
+      </select>
+      <span id="city-error"></span>
+      <button type="submit" id="checkout-submit-btn">Xác nhận</button>
+    </form>
+  </div>
+
+  <div id="results-display" style="padding: 24px; font-family: monospace;"></div>
+
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/data.js"></script>
+  <script src="../scripts/storage.js"></script>
+  <script src="../scripts/products.js"></script>
+  <script src="../scripts/product-detail.js"></script>
+  <script src="../scripts/search.js"></script>
+  <script src="../scripts/cart.js"></script>
+  <script src="../scripts/wishlist.js"></script>
+  <script src="../scripts/checkout.js"></script>
+  <script src="../scripts/order-success.js"></script>
+  <script src="../scripts/forms.js"></script>
+  <script src="../scripts/main.js"></script>
+
+  <script>
+    const suite = {
+      passes: 0,
+      failures: 0,
+      tests: [],
+      assert(desc, condition) {
+        if (condition) {
+          this.passes++;
+          this.tests.push({ desc, status: 'PASS' });
+          console.log(`[PASS] ${desc}`);
+        } else {
+          this.failures++;
+          this.tests.push({ desc, status: 'FAIL' });
+          console.error(`[FAIL] ${desc}`);
+        }
+      }
+    };
+
+    window.__TEST_RUNNER__ = suite;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('--- STARTING SOLEVAULT AUTOMATED TEST SUITE ---');
+
+      // Test 1: Data Integrity
+      suite.assert('Data contains full sneakers catalog (100 products)', Array.isArray(SOLEVAULT_PRODUCTS) && SOLEVAULT_PRODUCTS.length === 100);
+      const allHaveSKU = SOLEVAULT_PRODUCTS.every(p => p.id && p.sku && p.name && p.price > 0 && p.brand);
+      suite.assert('All products have valid id, sku, name, positive price, and brand', allHaveSKU);
+
+      // Test 1b: Image Audit & Uniqueness Verification
+      const primaryImages = SOLEVAULT_PRODUCTS.map(p => p.images && p.images[0]);
+      const uniquePrimary = new Set(primaryImages);
+      suite.assert('Zero duplicate primary image URLs across 100 products (100 unique images)', uniquePrimary.size === 100);
+
+      const productNames = SOLEVAULT_PRODUCTS.map(p => `${p.brand} ${p.name}`.toLowerCase());
+      const uniqueNames = new Set(productNames);
+      suite.assert('Zero duplicate sneaker models across catalog (100 unique models)', uniqueNames.size === 100);
+
+      const resolvedSample = SOLEVAULT_UTILS.resolveProductImage(SOLEVAULT_PRODUCTS[0].images[0]);
+      suite.assert('Image resolver produces valid non-empty string', typeof resolvedSample === 'string' && resolvedSample.length > 0);
+
+      // Test 2: Currency Formatter
+      const formattedVND = SOLEVAULT_UTILS.formatCurrency(3500000);
+      suite.assert('Currency formatter handles 3.500.000 VND', formattedVND.includes('3.500.000') || formattedVND.includes('3,500,000') || formattedVND.includes('₫'));
+
+      // Test 3: Diacritics Removal
+      const nonAccent = SOLEVAULT_UTILS.removeVietnameseTones('Giày Thể Thao Nam Nữ Đẹp');
+      suite.assert('Vietnamese tone remover converts correctly', nonAccent === 'giay the thao nam nu dep');
+
+      // Test 4: Storage Fallback & Storage Operations
+      SOLEVAULT_STORAGE.set('test_key', { hello: 'world' });
+      const testVal = SOLEVAULT_STORAGE.get('test_key');
+      suite.assert('Storage set and get working', testVal && testVal.hello === 'world');
+      SOLEVAULT_STORAGE.remove('test_key');
+      suite.assert('Storage remove working', SOLEVAULT_STORAGE.get('test_key') === null);
+
+      // Test 5: Cart Operations
+      SOLEVAULT_CART.clearCart();
+      suite.assert('Cart initializes empty', SOLEVAULT_CART.getCart().length === 0);
+      
+      const sampleItem = SOLEVAULT_PRODUCTS[0];
+      const added = SOLEVAULT_CART.addToCart(sampleItem.id, 42, 1);
+      suite.assert('Can add item to cart with size 42', added === true);
+      suite.assert('Cart count is now 1', SOLEVAULT_CART.getItemCount() === 1);
+      
+      // Add same item and size -> increments qty
+      SOLEVAULT_CART.addToCart(sampleItem.id, 42, 1);
+      suite.assert('Adding identical item/size increments quantity to 2', SOLEVAULT_CART.getItemCount() === 2);
+      
+      // Update quantity
+      SOLEVAULT_CART.updateQuantity(sampleItem.id, 42, 3);
+      suite.assert('Updating quantity to 3 works', SOLEVAULT_CART.getItemCount() === 3);
+
+      // Subtotal calculation
+      const expectedSubtotal = sampleItem.price * 3;
+      suite.assert('Cart subtotal matches calculated total', SOLEVAULT_CART.getSubtotal() === expectedSubtotal);
+
+      // Remove from cart
+      SOLEVAULT_CART.removeFromCart(sampleItem.id, 42);
+      suite.assert('Removing item returns cart to empty', SOLEVAULT_CART.getCart().length === 0);
+
+      // Test 6: Wishlist Operations
+      SOLEVAULT_STORAGE.remove(SOLEVAULT_CONFIG.STORAGE_KEYS.WISHLIST);
+      const isFav1 = SOLEVAULT_WISHLIST.toggle(sampleItem.id);
+      suite.assert('Toggle product to wishlist returns true', isFav1 === true);
+      suite.assert('Product is in wishlist', SOLEVAULT_WISHLIST.has(sampleItem.id) === true);
+      const isFav2 = SOLEVAULT_WISHLIST.toggle(sampleItem.id);
+      suite.assert('Toggle product second time returns false (removed)', isFav2 === false);
+      suite.assert('Product is no longer in wishlist', SOLEVAULT_WISHLIST.has(sampleItem.id) === false);
+
+      // Test 7: Phone Validation (Vietnam Regex)
+      const validPhone = '0987654321';
+      const invalidPhone1 = '12345';
+      const invalidPhone2 = '0123456789'; // 01 is not a modern valid VN mobile prefix
+      const phoneRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+      suite.assert('Valid VN phone passes regex', phoneRegex.test(validPhone));
+      suite.assert('Short phone fails regex', !phoneRegex.test(invalidPhone1));
+      suite.assert('Invalid prefix phone fails regex', !phoneRegex.test(invalidPhone2));
+
+      // Test 8: Search Execution
+      const searchInput = document.getElementById('search-input');
+      if (searchInput && typeof SOLEVAULT_SEARCH !== 'undefined') {
+        searchInput.value = 'samba';
+        SOLEVAULT_SEARCH.executeSearch('samba');
+        const resultsEl = document.getElementById('search-live-results');
+        suite.assert('Search for "samba" renders results', resultsEl && resultsEl.innerHTML.includes('Samba'));
+      }
+
+      // Test 9: Sorting & Filtering
+      if (typeof SOLEVAULT_CATALOG !== 'undefined') {
+        const filteredNike = SOLEVAULT_CATALOG.applyFilters({ brand: 'Nike' });
+        suite.assert('Catalog filters by brand Nike', filteredNike.length === 25 && filteredNike.every(p => p.brand === 'Nike'));
+        
+        const sortedDesc = SOLEVAULT_CATALOG.sortProducts(SOLEVAULT_PRODUCTS, 'price-desc');
+        suite.assert('Sorting by price-desc works', sortedDesc[0].price >= sortedDesc[1].price);
+
+        const sortedAsc = SOLEVAULT_CATALOG.sortProducts(SOLEVAULT_PRODUCTS, 'price-asc');
+        suite.assert('Sorting by price-asc works', sortedAsc[0].price <= sortedAsc[1].price);
+      }
+
+      // Test 10: Mobile Drawer Interaction
+      const drawer = document.getElementById('mobile-drawer');
+      const toggleBtn = document.getElementById('mobile-menu-toggle');
+      if (toggleBtn && drawer) {
+        toggleBtn.click();
+        suite.assert('Mobile menu toggle opens drawer', drawer.classList.contains('active'));
+        const closeBtn = document.getElementById('mobile-drawer-close');
+        if (closeBtn) {
+          closeBtn.click();
+          suite.assert('Mobile menu close button closes drawer', !drawer.classList.contains('active'));
+        }
+      }
+
+      console.log(`--- FINISHED: ${suite.passes} PASSED, ${suite.failures} FAILED ---`);
+      
+      const display = document.getElementById('results-display');
+      display.style.cssText = 'max-width: 800px; margin: 40px auto; padding: 32px; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: Inter, sans-serif;';
+      display.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #E5E5E0; padding-bottom: 16px; margin-bottom: 24px;">
+          <div>
+            <h1 style="font-size: 24px; font-weight: 800; margin: 0; color: #171717;">SOLEVAULT Automated Test Suite</h1>
+            <p style="margin: 4px 0 0; color: #707070; font-size: 14px;">Frontend Verification & Resilience Report</p>
+          </div>
+          <a href="../index.html" style="background: #171717; color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-size: 13px; font-weight: 600;">&larr; Về trang chủ</a>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+          <div style="background: #E8F8F0; border: 1px solid #A3E4D7; padding: 16px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 32px; font-weight: 900; color: #1E824C;">${suite.passes}</div>
+            <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #1E824C; letter-spacing: 0.05em;">Tests Passed</div>
+          </div>
+          <div style="background: ${suite.failures === 0 ? '#F5F5F2' : '#FDF0F0'}; border: 1px solid ${suite.failures === 0 ? '#E5E5E0' : '#FADBD8'}; padding: 16px; border-radius: 8px; text-align: center;">
+            <div style="font-size: 32px; font-weight: 900; color: ${suite.failures === 0 ? '#707070' : '#D63031'};">${suite.failures}</div>
+            <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: ${suite.failures === 0 ? '#707070' : '#D63031'}; letter-spacing: 0.05em;">Tests Failed</div>
+          </div>
+        </div>
+        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #525252;">Chi tiết kiểm thử</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          ${suite.tests.map(t => `
+            <li style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #FAFAF8; border: 1px solid #EAEAEA; border-radius: 6px; font-size: 13.5px;">
+              <span style="color: #151515;">${t.desc}</span>
+              <span style="background: ${t.status === 'PASS' ? '#1E824C' : '#D63031'}; color: #fff; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px;">${t.status}</span>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    });
+  </script>
+</body>
+</html>

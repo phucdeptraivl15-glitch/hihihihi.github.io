@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Xác nhận đơn hàng demo thành công tại SOLEVAULT. Xem mã đơn, chi tiết sản phẩm và thông tin giao nhận COD.">
+  <title>Đặt hàng thành công — SOLEVAULT</title>
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23171717'/><text x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%23FF5A36'>SV</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+  <link rel="stylesheet" href="../styles/animations.css">
+  <link rel="stylesheet" href="../styles/responsive.css">
+
+  <script>
+    function handleImgErr(img) {
+      if (!img || img.dataset.hasFailed) return;
+      img.dataset.hasFailed = 'true';
+      img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="%23EFEFEA"><rect width="400" height="400" fill="%23EFEFEA"/><path d="M70 230 C90 200, 130 190, 180 200 C210 170, 260 160, 310 180 C330 200, 340 230, 330 260 C320 280, 280 280, 240 280 L100 280 C80 280, 60 260, 70 230 Z" fill="%23D6D6D0"/><text x="50%" y="80%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="%23707070" font-weight="bold">SOLEVAULT SNEAKER</text></svg>';
+    }
+    window.handleImgErr = handleImgErr;
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Chuyển đến nội dung chính</a>
+  <div id="site-backdrop" class="backdrop" aria-hidden="true"></div>
+
+  <!-- Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Thông báo">
+    <div class="announcement-bar-inner">
+      <span class="announcement-tag">Demo Store</span>
+      <span>CẢM ƠN BẠN ĐÃ TRẢI NGHIỆM ĐẶT HÀNG DEMO TẠI SOLEVAULT</span>
+    </div>
+  </aside>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="../index.html" class="site-logo" aria-label="SOLEVAULT Trang chủ">
+        <div class="site-logo-symbol">S</div>
+        <span>SOLE<span class="logo-accent">VAULT</span></span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Menu chính">
+        <ul class="nav-desktop-list">
+          <li class="nav-item"><a href="../index.html" class="nav-link">Trang chủ</a></li>
+          <li class="nav-item"><a href="products.html" class="nav-link">Sneakers</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">Về chúng tôi</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="products.html" class="btn btn-outline btn-sm">Xem thêm sản phẩm</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ORDER SUCCESS CONTAINER -->
+  <main id="main-content" class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <div id="order-success-container">
+      <!-- Injected dynamically by scripts/order-success.js -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 SOLEVAULT. All rights reserved.</div>
+        <div class="footer-disclaimer">Website demo frontend — Không thanh toán giao dịch thật.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/data.js"></script>
+  <script src="../scripts/storage.js"></script>
+  <script src="../scripts/products.js"></script>
+  <script src="../scripts/product-detail.js"></script>
+  <script src="../scripts/search.js"></script>
+  <script src="../scripts/cart.js"></script>
+  <script src="../scripts/wishlist.js"></script>
+  <script src="../scripts/checkout.js"></script>
+  <script src="../scripts/order-success.js"></script>
+  <script src="../scripts/forms.js"></script>
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

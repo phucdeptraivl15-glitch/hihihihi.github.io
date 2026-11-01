@@ -1,0 +1,105 @@
+/**
+ * SOLEVAULT — Design Tokens
+ * Premium Streetwear & Editorial E-Commerce Design System
+ */
+
+:root {
+  /* Color Palette */
+  --color-bg: #F5F5F2;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F0F0EC;
+  --color-text: #151515;
+  --color-text-secondary: #525252;
+  --color-muted: #707070;
+  --color-light-muted: #9E9E9E;
+  --color-accent: #FF5A36;
+  --color-accent-hover: #E24724;
+  --color-accent-subtle: #FFF0ED;
+  --color-dark: #171717;
+  --color-dark-surface: #212121;
+  --color-border: #E5E5E0;
+  --color-border-dark: #2E2E2E;
+
+  /* Semantic Feedback Colors */
+  --color-success: #1E824C;
+  --color-success-bg: #E8F8F0;
+  --color-success-border: #A3E4D7;
+  --color-error: #D63031;
+  --color-error-bg: #FDF0F0;
+  --color-error-border: #FADBD8;
+  --color-warning: #D35400;
+  --color-warning-bg: #FEF5E7;
+
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+  /* Type Scale */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.84375rem; /* 13.5px */
+  --text-base: 0.9375rem;/* 15px */
+  --text-md: 1.0625rem;  /* 17px */
+  --text-lg: 1.25rem;    /* 20px */
+  --text-xl: 1.5rem;     /* 24px */
+  --text-2xl: 2rem;      /* 32px */
+  --text-3xl: 2.5rem;    /* 40px */
+  --text-4xl: 3.25rem;   /* 52px */
+  --text-hero: 4.5rem;   /* 72px */
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 104px;
+
+  /* Layout */
+  --container-width: 1400px;
+  --container-narrow: 920px;
+  --container-padding: 24px;
+  --header-height: 76px;
+  --announcement-height: 38px;
+
+  /* Border Radii */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --shadow-drawer: -8px 0 32px rgba(0, 0, 0, 0.18);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Z-indices */
+  --z-skip-link: 9999;
+  --z-toast: 1000;
+  --z-modal: 900;
+  --z-drawer: 800;
+  --z-backdrop: 700;
+  --z-search-overlay: 600;
+  --z-header: 500;
+  --z-sticky: 400;
+  --z-dropdown: 300;
+}

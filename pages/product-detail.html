@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Xem chi tiết sneaker tại SOLEVAULT. Thông tin chất liệu, bảng size EU chuẩn, chế độ giao hàng COD và kiểm tra hàng trước khi thanh toán.">
+  <title>Chi tiết Sneaker — SOLEVAULT</title>
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23171717'/><text x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%23FF5A36'>SV</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <link rel="stylesheet" href="../styles/pages.css">
+  <link rel="stylesheet" href="../styles/animations.css">
+  <link rel="stylesheet" href="../styles/responsive.css">
+
+  <script>
+    function handleImgErr(img) {
+      if (!img || img.dataset.hasFailed) return;
+      img.dataset.hasFailed = 'true';
+      img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="%23EFEFEA"><rect width="400" height="400" fill="%23EFEFEA"/><path d="M70 230 C90 200, 130 190, 180 200 C210 170, 260 160, 310 180 C330 200, 340 230, 330 260 C320 280, 280 280, 240 280 L100 280 C80 280, 60 260, 70 230 Z" fill="%23D6D6D0"/><text x="50%" y="80%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="%23707070" font-weight="bold">SOLEVAULT SNEAKER</text></svg>';
+    }
+    window.handleImgErr = handleImgErr;
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Chuyển đến nội dung chính</a>
+  <div id="site-backdrop" class="backdrop" aria-hidden="true"></div>
+
+  <!-- Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Thông báo">
+    <div class="announcement-bar-inner">
+      <span class="announcement-tag">Demo Store</span>
+      <span>HỖ TRỢ ĐỔI SIZE TRONG 07 NGÀY NẾU MANG KHÔNG VỪA (QUY ĐỊNH DEMO)</span>
+    </div>
+  </aside>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <button type="button" class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Mở menu" aria-controls="mobile-drawer" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="../index.html" class="site-logo" aria-label="SOLEVAULT Trang chủ">
+        <div class="site-logo-symbol">S</div>
+        <span>SOLE<span class="logo-accent">VAULT</span></span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Menu chính">
+        <ul class="nav-desktop-list">
+          <li class="nav-item"><a href="../index.html" class="nav-link">Trang chủ</a></li>
+          <li class="nav-item"><a href="products.html?new=1" class="nav-link">Mới về</a></li>
+          <li class="nav-item"><a href="products.html" class="nav-link active">Sneakers</a></li>
+          <li class="nav-item has-dropdown">
+            <a href="products.html" class="nav-link">
+              Thương hiệu
+              <svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-grid">
+                <div class="dropdown-item"><a href="products.html?brand=Nike"><span>Nike</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=Adidas"><span>Adidas</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=New%20Balance"><span>New Balance</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=ASICS"><span>ASICS</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=Converse"><span>Converse</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=Puma"><span>Puma</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=Vans"><span>Vans</span></a></div>
+                <div class="dropdown-item"><a href="products.html?brand=Reebok"><span>Reebok</span></a></div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item"><a href="products.html?sale=1" class="nav-link">Ưu đãi</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">Về chúng tôi</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="action-btn" id="search-toggle-btn" aria-label="Tìm kiếm sneaker">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <a href="wishlist.html" class="action-btn" aria-label="Xem danh sách yêu thích">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count badge-wishlist-count" style="display: none;">0</span>
+        </a>
+
+        <button type="button" class="action-btn cart-toggle-btn" aria-label="Xem giỏ hàng">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="badge-count badge-cart-count" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside id="mobile-drawer" class="mobile-drawer" aria-label="Menu di động" aria-hidden="true">
+    <div class="mobile-drawer-header">
+      <a href="../index.html" class="site-logo">
+        <div class="site-logo-symbol">S</div>
+        <span>SOLE<span class="logo-accent">VAULT</span></span>
+      </a>
+      <button type="button" class="btn-icon" id="mobile-drawer-close" aria-label="Đóng menu">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <nav>
+        <ul class="mobile-nav-list">
+          <li><a href="../index.html" class="mobile-nav-link">Trang chủ</a></li>
+          <li><a href="products.html?new=1" class="mobile-nav-link">Mới về</a></li>
+          <li><a href="products.html" class="mobile-nav-link active">Tất cả Sneakers</a></li>
+          <li><a href="products.html?sale=1" class="mobile-nav-link">Ưu đãi giảm giá</a></li>
+          <li><a href="wishlist.html" class="mobile-nav-link">Danh sách yêu thích</a></li>
+          <li><a href="about.html" class="mobile-nav-link">Về SOLEVAULT</a></li>
+          <li><a href="contact.html" class="mobile-nav-link">Liên hệ hỗ trợ</a></li>
+          <li><a href="size-guide.html" class="mobile-nav-link">Bảng hướng dẫn chọn size</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Search Overlay -->
+  <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="search-box">
+      <div class="search-header">
+        <form id="search-form" class="search-input-wrap">
+          <svg class="icon-svg text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="search" id="search-input" class="search-input" placeholder="Tìm theo tên, thương hiệu, mã SKU..." autocomplete="off" aria-label="Tìm kiếm"/>
+          <button type="button" id="search-clear-btn" class="search-clear" aria-label="Xóa">&times;</button>
+        </form>
+        <button type="button" id="search-close-btn" class="btn-icon" aria-label="Đóng tìm kiếm">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="search-results-area">
+        <div id="search-default-suggestions">
+          <div class="search-suggestions-title">Từ khóa tìm kiếm phổ biến</div>
+          <div class="search-tags">
+            <button type="button" class="search-tag-btn" data-search-tag="Jordan">Jordan</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Samba">Samba</button>
+            <button type="button" class="search-tag-btn" data-search-tag="1906">1906</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Kayano">Kayano</button>
+          </div>
+        </div>
+        <div id="search-live-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini-Cart Drawer -->
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Giỏ hàng mini" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span>GIỎ HÀNG</span>
+      </div>
+      <button type="button" class="btn-icon" id="cart-drawer-close" aria-label="Đóng giỏ hàng">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer-body">
+      <!-- Empty Notice -->
+      <div id="cart-drawer-empty-state" class="empty-state" style="display: none; padding: 40px 10px;">
+        <div class="empty-state-icon">
+          <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </div>
+        <h3 class="empty-state-title" style="font-size: 1.1rem;">Giỏ hàng của bạn đang trống</h3>
+        <p class="empty-state-text" style="font-size: 13px;">Hãy chọn những đôi sneaker yêu thích để thêm vào giỏ.</p>
+        <a href="products.html" class="btn btn-primary btn-sm">Xem tất cả sneaker</a>
+      </div>
+
+      <!-- Item List Container -->
+      <div id="cart-drawer-items-list" class="cart-drawer-items"></div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div id="cart-drawer-footer" class="cart-drawer-footer">
+      <div class="cart-drawer-subtotal">
+        <span class="text-muted">Tạm tính:</span>
+        <span id="cart-drawer-subtotal-val" class="total-amount">0 ₫</span>
+      </div>
+      <div class="cart-drawer-note">
+        * Phí vận chuyển COD demo sẽ được tính ở bước thanh toán.
+      </div>
+      <div class="cart-drawer-btns">
+        <a href="checkout.html" class="btn btn-primary btn-full">
+          Thanh toán COD demo &rarr;
+        </a>
+        <a href="cart.html" class="btn btn-secondary btn-full">
+          Xem chi tiết giỏ hàng
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN PRODUCT DETAIL CONTAINER -->
+  <main id="main-content" class="container">
+    <div id="product-detail-view">
+      <!-- Injected dynamically by scripts/product-detail.js -->
+    </div>
+
+    <!-- Related Products Section -->
+    <section class="products-section" style="padding-top: 20px; border-top: 1px solid var(--color-border);">
+      <div class="section-header">
+        <span class="section-kicker">Gợi ý tương tự</span>
+        <h2 class="section-title">SẢN PHẨM CÙNG PHONG CÁCH</h2>
+      </div>
+      <div id="related-products-grid" class="products-grid">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col-brand">
+          <a href="../index.html" class="site-logo">
+            <div class="site-logo-symbol">S</div>
+            <span>SOLE<span class="logo-accent">VAULT</span></span>
+          </a>
+          <p class="footer-tagline">
+            "Không chỉ là một đôi giày. Đó là dấu ấn của bạn." Điểm đến của những tín đồ đam mê sneaker và phong cách streetwear hiện đại.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title">Cửa hàng</div>
+          <ul class="footer-links">
+            <li><a href="products.html?new=1" class="footer-link">Sản phẩm mới về</a></li>
+            <li><a href="products.html" class="footer-link">Tất cả sneakers</a></li>
+            <li><a href="products.html?sale=1" class="footer-link">Sản phẩm giảm giá</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Hỗ trợ khách hàng</div>
+          <ul class="footer-links">
+            <li><a href="size-guide.html" class="footer-link">Hướng dẫn chọn size</a></li>
+            <li><a href="shipping-returns.html" class="footer-link">Chính sách giao hàng & COD</a></li>
+            <li><a href="faq.html" class="footer-link">Câu hỏi thường gặp</a></li>
+            <li><a href="contact.html" class="footer-link">Liên hệ hỗ trợ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Về SOLEVAULT</div>
+          <ul class="footer-links">
+            <li><a href="about.html" class="footer-link">Câu chuyện thương hiệu</a></li>
+            <li><a href="privacy.html" class="footer-link">Chính sách bảo mật demo</a></li>
+            <li><a href="terms.html" class="footer-link">Điều khoản dịch vụ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col-newsletter">
+          <div class="footer-col-title">Đăng ký nhận tin</div>
+          <form class="footer-form">
+            <input type="email" class="footer-input" placeholder="Email của bạn..." required aria-label="Email"/>
+            <button type="submit" class="btn btn-accent btn-sm">Gửi</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 SOLEVAULT — Premium Sneaker Store. All rights reserved.</div>
+        <div class="footer-disclaimer">
+          Tuyên bố miễn trừ: Website SOLEVAULT là dự án demo frontend xây dựng bằng HTML5, CSS3 và Vanilla JavaScript thuần.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/data.js"></script>
+  <script src="../scripts/storage.js"></script>
+  <script src="../scripts/products.js"></script>
+  <script src="../scripts/product-detail.js"></script>
+  <script src="../scripts/search.js"></script>
+  <script src="../scripts/cart.js"></script>
+  <script src="../scripts/wishlist.js"></script>
+  <script src="../scripts/checkout.js"></script>
+  <script src="../scripts/order-success.js"></script>
+  <script src="../scripts/forms.js"></script>
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

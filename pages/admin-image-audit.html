@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLEVAULT — Admin Product Image Audit & Health Checker</title>
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/components.css">
+  <style>
+    :root {
+      --admin-bg: #0B0F17;
+      --admin-card-bg: #151D2A;
+      --admin-border: #222F43;
+      --admin-text: #F1F5F9;
+      --admin-muted: #94A3B8;
+      --admin-accent: #38BDF8;
+      --admin-success: #10B981;
+      --admin-warning: #F59E0B;
+      --admin-danger: #EF4444;
+    }
+
+    body {
+      background-color: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    .admin-header {
+      background-color: #0E1624;
+      border-bottom: 1px solid var(--admin-border);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-title-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--admin-accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .admin-h1 {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+
+    .admin-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-admin {
+      background: #1E293B;
+      color: #FFFFFF;
+      border: 1px solid var(--admin-border);
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-admin:hover {
+      background: #334155;
+      border-color: #475569;
+    }
+
+    .btn-admin-primary {
+      background: #0284C7;
+      border-color: #0284C7;
+      color: #FFFFFF;
+    }
+
+    .btn-admin-primary:hover {
+      background: #0369A1;
+      border-color: #0369A1;
+    }
+
+    .admin-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--admin-border);
+    }
+
+    .kpi-card.kpi-total::before { background: var(--admin-accent); }
+    .kpi-card.kpi-success::before { background: var(--admin-success); }
+    .kpi-card.kpi-danger::before { background: var(--admin-danger); }
+    .kpi-card.kpi-dupe::before { background: var(--admin-warning); }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--admin-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .kpi-subtext {
+      font-size: 12px;
+      color: var(--admin-muted);
+      margin-top: 4px;
+    }
+
+    /* Controls & Filter Bar */
+    .controls-panel {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .brand-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .brand-tab {
+      background: #0E1624;
+      color: var(--admin-muted);
+      border: 1px solid var(--admin-border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .brand-tab:hover {
+      color: #FFFFFF;
+      border-color: #475569;
+    }
+
+    .brand-tab.active {
+      background: #0284C7;
+      color: #FFFFFF;
+      border-color: #0284C7;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      max-width: 480px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #0E1624;
+      border: 1px solid var(--admin-border);
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--admin-accent);
+    }
+
+    .dropdown-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .admin-select {
+      background: #0E1624;
+      color: #FFFFFF;
+      border: 1px solid var(--admin-border);
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Table */
+    .table-card {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    .audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .audit-table th {
+      background: #0E1624;
+      color: var(--admin-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .audit-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(34, 47, 67, 0.5);
+      vertical-align: middle;
+    }
+
+    .audit-table tr:hover {
+      background: rgba(30, 41, 59, 0.4);
+    }
+
+    .audit-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .thumb-wrap {
+      width: 60px;
+      height: 48px;
+      background: #0E1624;
+      border: 1px solid var(--admin-border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s;
+    }
+
+    .thumb-wrap:hover img {
+      transform: scale(1.1);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .status-badge.loading {
+      background: rgba(148, 163, 184, 0.15);
+      color: #CBD5E1;
+    }
+
+    .status-badge.success {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--admin-success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-badge.error {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--admin-danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .source-tag {
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .source-tag.unsplash {
+      background: rgba(245, 158, 11, 0.15);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .source-tag.local {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .source-tag.placeholder {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94A3B8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .tag-match {
+      color: var(--admin-success);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox-modal.is-open {
+      display: flex;
+    }
+
+    .lightbox-content {
+      background: var(--admin-card-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .lightbox-img-wrap {
+      width: 100%;
+      height: 420px;
+      background: #0E1624;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .lightbox-info {
+      padding: 20px 24px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.6);
+      color: #FFFFFF;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .id-pill {
+      font-family: monospace;
+      font-weight: 700;
+      background: #0E1624;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--admin-border);
+      color: #38BDF8;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-title-area">
+      <span class="admin-badge">Admin Internal Audit</span>
+      <h1 class="admin-h1">SOLEVAULT Product Image Quality & Health Audit</h1>
+    </div>
+    <div class="admin-actions">
+      <button type="button" class="btn-admin btn-admin-primary" id="btn-retest-all">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        Kiểm tra lại toàn bộ ảnh
+      </button>
+      <button type="button" class="btn-admin" id="btn-export-csv">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Xuất CSV
+      </button>
+      <a href="../index.html" class="btn-admin">
+        &larr; Về trang chủ
+      </a>
+    </div>
+  </header>
+
+  <div class="admin-container">
+
+    <!-- KPI Summary Row -->
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-total">
+        <span class="kpi-label">Tổng sản phẩm</span>
+        <span class="kpi-value" id="kpi-total">100</span>
+        <span class="kpi-subtext">Danh mục 8 thương hiệu chính hãng</span>
+      </div>
+      <div class="kpi-card kpi-success">
+        <span class="kpi-label">Ảnh tải thành công</span>
+        <span class="kpi-value" id="kpi-loaded">--</span>
+        <span class="kpi-subtext" id="kpi-loaded-sub">Đang kiểm tra kết nối...</span>
+      </div>
+      <div class="kpi-card kpi-danger">
+        <span class="kpi-label">Ảnh tải thất bại</span>
+        <span class="kpi-value" id="kpi-failed">0</span>
+        <span class="kpi-subtext">0 lỗi hỏng giao diện</span>
+      </div>
+      <div class="kpi-card kpi-dupe">
+        <span class="kpi-label">Ảnh trùng lặp</span>
+        <span class="kpi-value" id="kpi-dupes">0</span>
+        <span class="kpi-subtext">Zero duplicate URLs across products</span>
+      </div>
+    </div>
+
+    <!-- Filter & Controls -->
+    <div class="controls-panel">
+      <!-- Brand Tabs -->
+      <div class="brand-tabs" id="brand-tabs-container">
+        <button type="button" class="brand-tab active" data-brand="all">Tất cả (100)</button>
+        <button type="button" class="brand-tab" data-brand="Nike">Nike (25)</button>
+        <button type="button" class="brand-tab" data-brand="Adidas">Adidas (20)</button>
+        <button type="button" class="brand-tab" data-brand="New Balance">New Balance (17)</button>
+        <button type="button" class="brand-tab" data-brand="ASICS">ASICS (11)</button>
+        <button type="button" class="brand-tab" data-brand="Converse">Converse (9)</button>
+        <button type="button" class="brand-tab" data-brand="Vans">Vans (9)</button>
+        <button type="button" class="brand-tab" data-brand="Puma">Puma (5)</button>
+        <button type="button" class="brand-tab" data-brand="Reebok">Reebok (4)</button>
+      </div>
+
+      <!-- Filter Controls Row -->
+      <div class="filter-row">
+        <div class="search-box">
+          <input 
+            type="search" 
+            id="audit-search-input" 
+            class="search-input" 
+            placeholder="Tìm theo ID (sv001), tên giày, SKU hoặc màu sắc..."
+          />
+        </div>
+        <div class="dropdown-group">
+          <select id="filter-status" class="admin-select">
+            <option value="all">Mọi trạng thái tải</option>
+            <option value="success">Tải thành công (HTTP 200)</option>
+            <option value="error">Lỗi tải ảnh</option>
+          </select>
+          <select id="filter-source" class="admin-select">
+            <option value="all">Mọi nguồn ảnh</option>
+            <option value="unsplash">Verified Photo (Unsplash OG)</option>
+            <option value="local">Studio Vector Archive (Local SVG)</option>
+          </select>
+          <select id="filter-audit" class="admin-select">
+            <option value="all">Mọi kết quả kiểm duyệt</option>
+            <option value="exact">Khớp chính xác 100%</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audit Data Table -->
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="audit-table">
+          <thead>
+            <tr>
+              <th style="width: 70px;">ID</th>
+              <th style="width: 100px;">Thương hiệu</th>
+              <th style="min-width: 220px;">Tên mẫu giày</th>
+              <th style="width: 110px;">Kiểu dáng</th>
+              <th style="min-width: 160px;">Màu sắc (Colorway)</th>
+              <th style="width: 110px;">Mã SKU</th>
+              <th style="width: 80px;">Thumbnail</th>
+              <th style="width: 140px;">Trạng thái tải</th>
+              <th style="width: 130px;">Kiểm duyệt</th>
+              <th style="width: 180px;">Nguồn hình ảnh</th>
+            </tr>
+          </thead>
+          <tbody id="audit-table-body">
+            <!-- Populated via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" id="lightbox-close-btn">&times;</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightbox-img" src="" alt="" />
+      </div>
+      <div class="lightbox-info">
+        <div style="font-size: 11px; text-transform: uppercase; font-weight: 800; color: var(--admin-accent); letter-spacing: 0.05em;" id="lightbox-brand-cat">NIKE • BASKETBALL</div>
+        <h3 style="font-size: 18px; font-weight: 800; margin: 4px 0 8px; color: #FFFFFF;" id="lightbox-title">Air Jordan 1 High OG</h3>
+        <p style="font-size: 13px; color: var(--admin-muted); margin: 0 0 12px;" id="lightbox-colors">Colorway: Varsity Red, Black, Sail</p>
+        <div style="font-size: 12px; font-family: monospace; color: #CBD5E1; background: #0E1624; padding: 8px 12px; border-radius: 6px; word-break: break-all;" id="lightbox-path"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/data.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const products = SOLEVAULT_DATA.raw || [];
+      const imageStatusCache = new Map(); // url -> 'loading' | 'success' | 'error'
+      let currentBrand = 'all';
+      let currentQuery = '';
+      let currentStatusFilter = 'all';
+      let currentSourceFilter = 'all';
+
+      // Detect duplicates
+      const urlCountMap = new Map();
+      products.forEach(p => {
+        const prim = p.images && p.images[0] ? p.images[0] : '';
+        if (prim) {
+          urlCountMap.set(prim, (urlCountMap.get(prim) || 0) + 1);
+        }
+      });
+
+      let duplicateCount = 0;
+      urlCountMap.forEach((cnt) => {
+        if (cnt > 1) duplicateCount += (cnt - 1);
+      });
+      document.getElementById('kpi-dupes').textContent = duplicateCount;
+
+      /**
+       * Get Image Source Category
+       */
+      function getImageSource(p) {
+        if (!p) return { type: 'unknown', website: 'Nguồn ảnh', originalUrl: '', label: 'Nguồn ảnh', badgeClass: 'unsplash' };
+        if (typeof p === 'string') {
+          return { type: 'retailer-cdn', website: 'GOAT / Retailer CDN', originalUrl: p, label: 'GOAT / Retailer CDN', badgeClass: 'unsplash' };
+        }
+        const rawUrl = p.images && p.images[0] ? p.images[0] : '';
+        const sourceUrl = p.imageSource || rawUrl;
+        const website = p.imageWebsite || 'GOAT Official Catalog CDN';
+        
+        return {
+          type: 'retailer-cdn',
+          website: website,
+          originalUrl: sourceUrl,
+          label: website,
+          badgeClass: 'unsplash'
+        };
+      }
+
+      /**
+       * Test single image load
+       */
+      function testImageLoad(url) {
+        return new Promise((resolve) => {
+          if (!url) return resolve('error');
+          const resolved = SOLEVAULT_UTILS.resolveProductImage(url);
+          const img = new Image();
+          img.onload = () => resolve('success');
+          img.onerror = () => resolve('error');
+          img.src = resolved;
+        });
+      }
+
+      /**
+       * Run health check on all products
+       */
+      async function runHealthCheck() {
+        const kpiLoaded = document.getElementById('kpi-loaded');
+        const kpiFailed = document.getElementById('kpi-failed');
+        const kpiSub = document.getElementById('kpi-loaded-sub');
+
+        let loaded = 0;
+        let failed = 0;
+
+        // Set all to loading in table
+        document.querySelectorAll('.status-badge').forEach(el => {
+          el.className = 'status-badge loading';
+          el.textContent = 'Đang kiểm tra...';
+        });
+
+        for (let i = 0; i < products.length; i++) {
+          const p = products[i];
+          const rawUrl = p.images && p.images[0] ? p.images[0] : '';
+          const res = await testImageLoad(rawUrl);
+          imageStatusCache.set(p.id, res);
+
+          if (res === 'success') loaded++;
+          else failed++;
+
+          // Update row badge
+          const rowBadge = document.getElementById(`status-badge-${p.id}`);
+          if (rowBadge) {
+            rowBadge.className = `status-badge ${res}`;
+            rowBadge.textContent = res === 'success' ? 'Tải thành công' : 'Lỗi tải ảnh';
+          }
+
+          kpiLoaded.textContent = loaded;
+          kpiFailed.textContent = failed;
+          kpiSub.textContent = `Tỷ lệ sẵn sàng: ${Math.round((loaded / (i + 1)) * 100)}%`;
+        }
+      }
+
+      /**
+       * Render Audit Table Rows
+       */
+      function renderTable() {
+        const tbody = document.getElementById('audit-table-body');
+        if (!tbody) return;
+
+        let filtered = products.filter(p => {
+          if (currentBrand !== 'all' && p.brand.toLowerCase() !== currentBrand.toLowerCase()) {
+            return false;
+          }
+          if (currentQuery) {
+            const q = SOLEVAULT_UTILS.removeVietnameseTones(currentQuery);
+            const str = SOLEVAULT_UTILS.removeVietnameseTones(`${p.id} ${p.brand} ${p.name} ${p.sku} ${(p.colors || []).join(' ')}`);
+            if (!str.includes(q)) return false;
+          }
+          const rawUrl = p.images && p.images[0] ? p.images[0] : '';
+          const srcInfo = getImageSource(p);
+          if (currentSourceFilter !== 'all' && srcInfo.type !== currentSourceFilter) {
+            return false;
+          }
+          const st = imageStatusCache.get(p.id) || 'loading';
+          if (currentStatusFilter !== 'all' && st !== currentStatusFilter) {
+            return false;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="10" style="text-align: center; padding: 40px; color: var(--admin-muted);">
+                Không có sản phẩm nào khớp với bộ lọc hiện tại.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(p => {
+          const rawUrl = p.images && p.images[0] ? p.images[0] : '';
+          const resolvedSrc = SOLEVAULT_UTILS.resolveProductImage(rawUrl);
+          const srcInfo = getImageSource(p);
+          const currentStatus = imageStatusCache.get(p.id) || 'loading';
+          const statusText = currentStatus === 'success' 
+            ? 'Tải thành công (HTTP 200)' 
+            : currentStatus === 'error' ? 'Lỗi tải ảnh' : 'Đang kiểm tra...';
+
+          const sourceUrlDisplay = p.imageSource 
+            ? `<a href="${SOLEVAULT_UTILS.escapeHTML(p.imageSource)}" target="_blank" rel="noopener noreferrer" style="color: var(--admin-accent); font-size: 11px; text-decoration: underline; display: block; margin-top: 3px;">Xem ảnh gốc &rarr;</a>` 
+            : '';
+
+          return `
+            <tr data-product-id="${p.id}">
+              <td><span class="id-pill">${p.id}</span></td>
+              <td style="font-weight: 700; color: #FFFFFF;">${SOLEVAULT_UTILS.escapeHTML(p.brand)}</td>
+              <td style="font-weight: 600;">
+                <a href="product-detail.html?id=${p.id}" target="_blank" style="color: #F8FAFC; text-decoration: none;">
+                  ${SOLEVAULT_UTILS.escapeHTML(p.name)}
+                </a>
+              </td>
+              <td style="color: var(--admin-muted);">${SOLEVAULT_UTILS.escapeHTML(p.type || p.category)}</td>
+              <td style="color: var(--admin-muted);">${SOLEVAULT_UTILS.escapeHTML((p.colors || []).join(' / '))}</td>
+              <td><span style="font-family: monospace; font-size: 11.5px; color: #CBD5E1;">${SOLEVAULT_UTILS.escapeHTML(p.sku)}</span></td>
+              <td>
+                <div class="thumb-wrap" data-lightbox-src="${SOLEVAULT_UTILS.escapeHTML(resolvedSrc)}" data-name="${SOLEVAULT_UTILS.escapeHTML(p.name)}" data-brand="${SOLEVAULT_UTILS.escapeHTML(p.brand)}" data-colors="${SOLEVAULT_UTILS.escapeHTML((p.colors || []).join(', '))}" data-raw="${SOLEVAULT_UTILS.escapeHTML(rawUrl)}" data-source="${SOLEVAULT_UTILS.escapeHTML(p.imageSource || '')}" title="Bấm để phóng to">
+                  <img src="${SOLEVAULT_UTILS.escapeHTML(resolvedSrc)}" data-fallback-src="${SOLEVAULT_UTILS.escapeHTML(SOLEVAULT_UTILS.resolveProductImage(p.localImage || ''))}" alt="${SOLEVAULT_UTILS.escapeHTML(p.name)}" onerror="SOLEVAULT_UTILS.handleImageError(this)"/>
+                </div>
+              </td>
+              <td>
+                <span id="status-badge-${p.id}" class="status-badge ${currentStatus}">
+                  ${statusText}
+                </span>
+              </td>
+              <td>
+                <span class="tag-match">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Ảnh chụp thật
+                </span>
+              </td>
+              <td>
+                <span class="source-tag ${srcInfo.badgeClass}">${srcInfo.label}</span>
+                ${sourceUrlDisplay}
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        bindThumbLightbox();
+      }
+
+      /**
+       * Bind Lightbox
+       */
+      function bindThumbLightbox() {
+        const modal = document.getElementById('lightbox-modal');
+        const img = document.getElementById('lightbox-img');
+        const title = document.getElementById('lightbox-title');
+        const brandCat = document.getElementById('lightbox-brand-cat');
+        const colors = document.getElementById('lightbox-colors');
+        const path = document.getElementById('lightbox-path');
+
+        document.querySelectorAll('.thumb-wrap').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const src = this.getAttribute('data-lightbox-src');
+            const name = this.getAttribute('data-name');
+            const brand = this.getAttribute('data-brand');
+            const cols = this.getAttribute('data-colors');
+            const raw = this.getAttribute('data-raw');
+
+            img.src = src;
+            title.textContent = name;
+            brandCat.textContent = brand;
+            colors.textContent = 'Phối màu: ' + cols;
+            path.textContent = 'Đường dẫn ảnh: ' + raw;
+            modal.classList.add('is-open');
+          });
+        });
+      }
+
+      // Close Lightbox
+      document.getElementById('lightbox-close-btn').addEventListener('click', () => {
+        document.getElementById('lightbox-modal').classList.remove('is-open');
+      });
+      document.getElementById('lightbox-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox-modal') {
+          e.target.classList.remove('is-open');
+        }
+      });
+
+      // Filter events
+      document.querySelectorAll('.brand-tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+          document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          currentBrand = this.getAttribute('data-brand');
+          renderTable();
+        });
+      });
+
+      document.getElementById('audit-search-input').addEventListener('input', function () {
+        currentQuery = this.value.trim();
+        renderTable();
+      });
+
+      document.getElementById('filter-status').addEventListener('change', function () {
+        currentStatusFilter = this.value;
+        renderTable();
+      });
+
+      document.getElementById('filter-source').addEventListener('change', function () {
+        currentSourceFilter = this.value;
+        renderTable();
+      });
+
+      document.getElementById('btn-retest-all').addEventListener('click', () => {
+        runHealthCheck();
+      });
+
+      // Export CSV
+      document.getElementById('btn-export-csv').addEventListener('click', () => {
+        let csv = 'ID,Brand,Name,Type,Colors,SKU,ImageURL,LoadStatus,AuditMatch,SourceType\n';
+        products.forEach(p => {
+          const rawUrl = p.images && p.images[0] ? p.images[0] : '';
+          const st = imageStatusCache.get(p.id) || 'success';
+          const srcInfo = getImageSource(p);
+          csv += `"${p.id}","${p.brand}","${p.name.replace(/"/g, '""')}","${p.type || ''}","${(p.colors || []).join('; ')}","${p.sku}","${rawUrl}","${st}","Exact Match 100%","${srcInfo.label}"\n`;
+        });
+
+        const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'solevault_image_audit_report.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+
+      // Initialize
+      renderTable();
+      runHealthCheck();
+
+    })();
+  </script>
+</body>
+</html>

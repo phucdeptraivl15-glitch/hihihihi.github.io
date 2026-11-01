@@ -1,0 +1,666 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SOLEVAULT — Premium Sneaker Store. Khám phá những đôi sneaker mang cá tính riêng và phong cách streetwear hiện đại.">
+  <title>SOLEVAULT — Premium Sneaker Store</title>
+  
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23171717'/><text x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%23FF5A36'>SV</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/pages.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+
+  <script>
+    function handleImgErr(img) {
+      if (!img || img.dataset.hasFailed) return;
+      img.dataset.hasFailed = 'true';
+      img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="%23EFEFEA"><rect width="400" height="400" fill="%23EFEFEA"/><path d="M70 230 C90 200, 130 190, 180 200 C210 170, 260 160, 310 180 C330 200, 340 230, 330 260 C320 280, 280 280, 240 280 L100 280 C80 280, 60 260, 70 230 Z" fill="%23D6D6D0"/><text x="50%" y="80%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="%23707070" font-weight="bold">SOLEVAULT SNEAKER</text></svg>';
+    }
+    window.handleImgErr = handleImgErr;
+  </script>
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Chuyển đến nội dung chính</a>
+
+  <!-- Global Backdrop -->
+  <div id="site-backdrop" class="backdrop" aria-hidden="true"></div>
+
+  <!-- Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Thông báo cửa hàng">
+    <div class="announcement-bar-inner">
+      <span class="announcement-tag">Demo Store</span>
+      <span>SOLEVAULT DEMO STORE — KHÁM PHÁ BỘ SƯU TẬP SNEAKER PREMIUM 2026</span>
+    </div>
+  </aside>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <!-- Mobile Hamburger Button -->
+      <button type="button" class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Mở menu điều hướng" aria-controls="mobile-drawer" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="index.html" class="site-logo" aria-label="SOLEVAULT Trang chủ">
+        <div class="site-logo-symbol">S</div>
+        <span>SOLE<span class="logo-accent">VAULT</span></span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-desktop" aria-label="Menu chính">
+        <ul class="nav-desktop-list">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/products.html?new=1" class="nav-link">Mới về</a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/products.html" class="nav-link">Sneakers</a>
+          </li>
+          <li class="nav-item has-dropdown">
+            <a href="pages/products.html" class="nav-link">
+              Thương hiệu
+              <svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <!-- Brands Dropdown -->
+            <div class="dropdown-menu">
+              <div class="dropdown-grid">
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=Nike">
+                    <span>Nike</span>
+                    <span class="brand-count">25</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=Adidas">
+                    <span>Adidas</span>
+                    <span class="brand-count">20</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=New%20Balance">
+                    <span>New Balance</span>
+                    <span class="brand-count">17</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=ASICS">
+                    <span>ASICS</span>
+                    <span class="brand-count">11</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=Converse">
+                    <span>Converse</span>
+                    <span class="brand-count">9</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=Puma">
+                    <span>Puma</span>
+                    <span class="brand-count">5</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=Vans">
+                    <span>Vans</span>
+                    <span class="brand-count">9</span>
+                  </a>
+                </div>
+                <div class="dropdown-item">
+                  <a href="pages/products.html?brand=Reebok">
+                    <span>Reebok</span>
+                    <span class="brand-count">4</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="pages/products.html?sale=1" class="nav-link">Ưu đãi</a>
+          </li>
+          <li class="nav-item">
+            <a href="pages/about.html" class="nav-link">Về chúng tôi</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <!-- Search Trigger Button -->
+        <button type="button" class="action-btn" id="search-toggle-btn" aria-label="Tìm kiếm sneaker">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <!-- Wishlist Button -->
+        <a href="pages/wishlist.html" class="action-btn" aria-label="Xem danh sách yêu thích">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count badge-wishlist-count" style="display: none;">0</span>
+        </a>
+
+        <!-- Mini-Cart Drawer Trigger -->
+        <button type="button" class="action-btn cart-toggle-btn" aria-label="Xem giỏ hàng">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="badge-count badge-cart-count" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside id="mobile-drawer" class="mobile-drawer" aria-label="Menu di động" aria-hidden="true">
+    <div class="mobile-drawer-header">
+      <a href="index.html" class="site-logo">
+        <div class="site-logo-symbol">S</div>
+        <span>SOLE<span class="logo-accent">VAULT</span></span>
+      </a>
+      <button type="button" class="btn-icon" id="mobile-drawer-close" aria-label="Đóng menu">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="mobile-drawer-body">
+      <nav>
+        <ul class="mobile-nav-list">
+          <li><a href="index.html" class="mobile-nav-link active">Trang chủ</a></li>
+          <li><a href="pages/products.html?new=1" class="mobile-nav-link">Mới về</a></li>
+          <li><a href="pages/products.html" class="mobile-nav-link">Tất cả Sneakers</a></li>
+          <li><a href="pages/products.html?sale=1" class="mobile-nav-link">Ưu đãi giảm giá</a></li>
+          <li><a href="pages/wishlist.html" class="mobile-nav-link">Danh sách yêu thích</a></li>
+          <li><a href="pages/about.html" class="mobile-nav-link">Về SOLEVAULT</a></li>
+          <li><a href="pages/contact.html" class="mobile-nav-link">Liên hệ hỗ trợ</a></li>
+          <li><a href="pages/size-guide.html" class="mobile-nav-link">Bảng hướng dẫn chọn size</a></li>
+        </ul>
+      </nav>
+
+      <div class="mobile-drawer-brands">
+        <div class="mobile-drawer-brands-title">Thương hiệu nổi bật</div>
+        <div class="mobile-brands-grid">
+          <a href="pages/products.html?brand=Nike">Nike</a>
+          <a href="pages/products.html?brand=Adidas">Adidas</a>
+          <a href="pages/products.html?brand=New%20Balance">New Balance</a>
+          <a href="pages/products.html?brand=ASICS">ASICS</a>
+          <a href="pages/products.html?brand=Converse">Converse</a>
+          <a href="pages/products.html?brand=Vans">Vans</a>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-drawer-footer">
+      <p>SOLEVAULT Frontend Demo • Hỗ trợ COD</p>
+    </div>
+  </aside>
+
+  <!-- Search Overlay -->
+  <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="search-box">
+      <div class="search-header">
+        <form id="search-form" class="search-input-wrap">
+          <svg class="icon-svg text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input 
+            type="search" 
+            id="search-input" 
+            class="search-input" 
+            placeholder="Tìm theo tên, thương hiệu, mã SKU hoặc phong cách..." 
+            autocomplete="off"
+            aria-label="Tìm kiếm"
+          />
+          <button type="button" id="search-clear-btn" class="search-clear" aria-label="Xóa từ khóa">&times;</button>
+        </form>
+        <button type="button" id="search-close-btn" class="btn-icon" aria-label="Đóng tìm kiếm">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="search-results-area">
+        <!-- Default Popular Tag Suggestions -->
+        <div id="search-default-suggestions">
+          <div class="search-suggestions-title">Từ khóa tìm kiếm phổ biến</div>
+          <div class="search-tags">
+            <button type="button" class="search-tag-btn" data-search-tag="Jordan">Jordan</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Samba">Samba</button>
+            <button type="button" class="search-tag-btn" data-search-tag="New Balance 1906">New Balance 1906</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Panda">Panda</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Kayano">Kayano</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Running">Running</button>
+            <button type="button" class="search-tag-btn" data-search-tag="Retro">Retro</button>
+          </div>
+        </div>
+
+        <!-- Live Results Container -->
+        <div id="search-live-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini-Cart Drawer -->
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Giỏ hàng mini" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span>GIỎ HÀNG</span>
+      </div>
+      <button type="button" class="btn-icon" id="cart-drawer-close" aria-label="Đóng giỏ hàng">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer-body">
+      <!-- Empty Notice -->
+      <div id="cart-drawer-empty-state" class="empty-state" style="display: none; padding: 40px 10px;">
+        <div class="empty-state-icon">
+          <svg class="icon-svg icon-svg-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </div>
+        <h3 class="empty-state-title" style="font-size: 1.1rem;">Giỏ hàng của bạn đang trống</h3>
+        <p class="empty-state-text" style="font-size: 13px;">Hãy chọn những đôi sneaker yêu thích để thêm vào giỏ.</p>
+        <a href="pages/products.html" class="btn btn-primary btn-sm">Xem tất cả sneaker</a>
+      </div>
+
+      <!-- Item List Container -->
+      <div id="cart-drawer-items-list" class="cart-drawer-items"></div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div id="cart-drawer-footer" class="cart-drawer-footer">
+      <div class="cart-drawer-subtotal">
+        <span class="text-muted">Tạm tính:</span>
+        <span id="cart-drawer-subtotal-val" class="total-amount">0 ₫</span>
+      </div>
+      <div class="cart-drawer-note">
+        * Phí vận chuyển COD demo sẽ được tính ở bước thanh toán.
+      </div>
+      <div class="cart-drawer-btns">
+        <a href="pages/checkout.html" class="btn btn-primary btn-full">
+          Thanh toán COD demo &rarr;
+        </a>
+        <a href="pages/cart.html" class="btn btn-secondary btn-full">
+          Xem chi tiết giỏ hàng
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main id="main-content">
+    <!-- 6.3 Hero Section -->
+    <section class="hero-section" aria-label="Phần giới thiệu nổi bật">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>Bộ sưu tập 2026</span>
+            <span>•</span>
+            <span>Streetwear Edition</span>
+          </div>
+          <h1 class="hero-title">
+            FIND YOUR <span class="title-accent">NEXT ICON.</span>
+          </h1>
+          <p class="hero-subtitle">
+            "Không chỉ là một đôi giày. Đó là dấu ấn của bạn." Khám phá những đôi sneaker mang cá tính riêng và tạo nên phong cách sống hiện đại.
+          </p>
+          <div class="hero-actions">
+            <a href="pages/products.html" class="btn btn-accent btn-lg">
+              KHÁM PHÁ SNEAKER
+            </a>
+            <a href="pages/products.html?new=1" class="btn btn-outline btn-lg" style="color: #FFFFFF; border-color: rgba(255,255,255,0.4);">
+              XEM BỘ SƯU TẬP
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-img-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1000&q=85" 
+              alt="Air Jordan 1 Retro High Chicago Lost and Found" 
+              class="hero-img"
+              onerror="handleImgErr(this)"
+            />
+            <div class="hero-floating-tag">
+              <span>ICON OF THE WEEK</span>
+              <span>Air Jordan 1 'Chicago'</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.4 Brand Strip -->
+    <section class="brand-strip" aria-label="Các thương hiệu sản phẩm">
+      <div class="container">
+        <div class="brand-strip-title">Thương hiệu đồng hành trong phong cách của bạn</div>
+        <div class="brand-strip-grid">
+          <a href="pages/products.html?brand=Nike" class="brand-item">Nike</a>
+          <a href="pages/products.html?brand=Adidas" class="brand-item">Adidas</a>
+          <a href="pages/products.html?brand=New%20Balance" class="brand-item">New Balance</a>
+          <a href="pages/products.html?brand=ASICS" class="brand-item">ASICS</a>
+          <a href="pages/products.html?brand=Converse" class="brand-item">Converse</a>
+          <a href="pages/products.html?brand=Puma" class="brand-item">Puma</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.5 Categories Section -->
+    <section class="categories-section" aria-label="Danh mục sneaker">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-kicker">Khám phá theo danh mục</span>
+          <h2 class="section-title">CHỌN PHONG CÁCH CỦA BẠN</h2>
+          <p class="section-desc">Từ những bước chạy năng động đến những sải bước thời trang đường phố.</p>
+        </div>
+
+        <div class="categories-grid">
+          <!-- Lifestyle -->
+          <article class="category-card">
+            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80" alt="Danh mục Lifestyle" class="category-card-img" onerror="handleImgErr(this)"/>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <div class="category-card-count">BỘ SƯU TẬP 01</div>
+              <h3 class="category-card-title">LIFESTYLE</h3>
+              <a href="pages/products.html?category=Lifestyle" class="category-card-link">
+                Xem chi tiết &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Running -->
+          <article class="category-card">
+            <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=800&q=80" alt="Danh mục Running" class="category-card-img" onerror="handleImgErr(this)"/>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <div class="category-card-count">BỘ SƯU TẬP 02</div>
+              <h3 class="category-card-title">RUNNING & TECH</h3>
+              <a href="pages/products.html?category=Running" class="category-card-link">
+                Xem chi tiết &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Retro & Terrace -->
+          <article class="category-card">
+            <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80" alt="Danh mục Retro Terrace" class="category-card-img" onerror="handleImgErr(this)"/>
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <div class="category-card-count">BỘ SƯU TẬP 03</div>
+              <h3 class="category-card-title">RETRO & TERRACE</h3>
+              <a href="pages/products.html?category=Retro" class="category-card-link">
+                Xem chi tiết &rarr;
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.6 New Arrivals Section -->
+    <section class="products-section" aria-label="Sản phẩm mới về">
+      <div class="container">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="section-kicker">Vừa cập bến</span>
+            <h2 class="section-title">NEW ARRIVALS</h2>
+            <p class="section-desc">Những phát hành sneaker mới nhất vừa được đưa lên kệ demo.</p>
+          </div>
+          <a href="pages/products.html?new=1" class="btn btn-outline">
+            XEM TẤT CẢ &rarr;
+          </a>
+        </div>
+
+        <div id="home-new-arrivals-grid" class="products-grid">
+          <!-- Dynamic products injected by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.7 Featured Collection (Editorial Banner) -->
+    <section class="featured-collection-section" aria-label="Bộ sưu tập biên tập">
+      <div class="container">
+        <div class="featured-collection-grid">
+          <div class="featured-img-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=900&q=80" 
+              alt="New Balance 550 & Retro Streetwear Styling" 
+              class="featured-img"
+              onerror="handleImgErr(this)"
+            />
+          </div>
+          <div class="featured-content">
+            <span class="section-kicker">Editorial Spotlight</span>
+            <h2 style="font-size: 2.25rem; margin-bottom: 16px; line-height: 1.15;">
+              SỰ TRỞ LẠI CỦA BIỂU TƯỢNG BÓNG RỔ THẬP NIÊN 80
+            </h2>
+            <p style="margin-bottom: 24px; color: var(--color-text-secondary); line-height: 1.7;">
+              Từ những sàn đấu gỗ bóng rổ năm 1989 đến đại lộ thời trang Tokyo và New York. Những đường nét cổ điển kết hợp cùng chất da hạt mềm mại tạo nên dấu ấn thanh lịch không thể thay thế cho tủ giày của bạn.
+            </p>
+            <a href="pages/products.html?category=Basketball" class="btn btn-primary">
+              KHÁM PHÁ VINTAGE HOOPS &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.8 Trending Sneakers Section -->
+    <section class="products-section" aria-label="Sneaker thịnh hành">
+      <div class="container">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="section-kicker">Được săn đón</span>
+            <h2 class="section-title">TRENDING SNEAKERS</h2>
+            <p class="section-desc">Những đôi giày định hình xu hướng thời trang đường phố năm nay.</p>
+          </div>
+          <a href="pages/products.html" class="btn btn-outline">
+            KHÁM PHÁ TOÀN BỘ &rarr;
+          </a>
+        </div>
+
+        <div id="home-trending-grid" class="products-grid">
+          <!-- Dynamic products injected by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.9 Editorial Story Section -->
+    <section class="editorial-section" aria-label="Góc nhìn biên tập">
+      <div class="container">
+        <div class="editorial-card">
+          <div>
+            <div class="editorial-author">SOLEVAULT EDITORIAL • VOLUME 01</div>
+            <div class="editorial-quote">
+              "Đôi giày của bạn kể câu chuyện bạn đã đi qua những đâu, và bạn đang hướng về điều gì."
+            </div>
+            <p style="color: #CCCCCC; max-width: 600px; line-height: 1.7;">
+              Tại SOLEVAULT, chúng tôi tôn vinh sự kết hợp giữa di sản thể thao và sự tự do của văn hóa đường phố. Mỗi đôi sneaker không đơn thuần là một món phụ kiện, mà là một tác phẩm thiết kế mang tính biểu tượng đồng hành cùng nhịp sống của bạn.
+            </p>
+          </div>
+          <div style="text-align: center;">
+            <a href="pages/about.html" class="btn btn-accent btn-lg">
+              ĐỌC CÂU CHUYỆN THƯƠNG HIỆU &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.10 Service Section -->
+    <section class="service-section" aria-label="Dịch vụ và cam kết demo">
+      <div class="container">
+        <div class="service-grid">
+          <div class="service-item">
+            <div class="service-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <div>
+              <div class="service-title">Thanh toán COD Demo</div>
+              <div class="service-desc">Nhận hàng và thanh toán trực tiếp, không yêu cầu thẻ tín dụng.</div>
+            </div>
+          </div>
+
+          <div class="service-item">
+            <div class="service-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            </div>
+            <div>
+              <div class="service-title">Kiểm tra khi nhận hàng</div>
+              <div class="service-desc">Đồng kiểm tra mẫu mã và kích cỡ đúng chuẩn trước khi thanh toán.</div>
+            </div>
+          </div>
+
+          <div class="service-item">
+            <div class="service-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            </div>
+            <div>
+              <div class="service-title">Hỗ trợ đổi size 07 ngày</div>
+              <div class="service-desc">Đổi cỡ giày nhanh chóng nếu mang không vừa (quy định demo).</div>
+            </div>
+          </div>
+
+          <div class="service-item">
+            <div class="service-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </div>
+            <div>
+              <div class="service-title">Tư vấn phong cách tận tâm</div>
+              <div class="service-desc">Đội ngũ am hiểu văn hóa sneaker hỗ trợ chọn dáng giày phù hợp.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.11 Newsletter Section -->
+    <section class="newsletter-section" aria-label="Đăng ký nhận thông tin">
+      <div class="container">
+        <div class="newsletter-box">
+          <span class="section-kicker">Đừng bỏ lỡ những phát hành mới</span>
+          <h2 class="section-title">GIA NHẬP CỘNG ĐỒNG SOLEVAULT</h2>
+          <p class="section-desc">
+            Nhận thông báo sớm nhất về các đợt phát hành sneaker mới, xu hướng streetwear và ưu đãi đặc quyền.
+          </p>
+          <form class="newsletter-form">
+            <input 
+              type="email" 
+              class="newsletter-input" 
+              placeholder="Nhập địa chỉ email của bạn..." 
+              required 
+              aria-label="Địa chỉ email đăng ký bản tin"
+            />
+            <button type="submit" class="btn btn-primary">
+              ĐĂNG KÝ
+            </button>
+          </form>
+          <div class="newsletter-disclaimer">
+            * Lưu ý demo: Dữ liệu đăng ký được ghi nhận trên trình duyệt nhằm kiểm thử giao diện frontend, chưa kết nối hệ thống gửi thư điện tử tự động.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 6.12 Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col-brand">
+          <a href="index.html" class="site-logo">
+            <div class="site-logo-symbol">S</div>
+            <span>SOLE<span class="logo-accent">VAULT</span></span>
+          </a>
+          <p class="footer-tagline">
+            "Không chỉ là một đôi giày. Đó là dấu ấn của bạn." Điểm đến của những tín đồ đam mê sneaker và phong cách streetwear hiện đại.
+          </p>
+          <div style="font-size: 13px; color: #888888; line-height: 1.6;">
+            128 Đường Lê Thánh Tôn, Bến Nghé, Quận 1, TP. Hồ Chí Minh (Địa chỉ demo)
+          </div>
+        </div>
+
+        <!-- Col 2: Shop Links -->
+        <div>
+          <div class="footer-col-title">Cửa hàng</div>
+          <ul class="footer-links">
+            <li><a href="pages/products.html?new=1" class="footer-link">Sản phẩm mới về</a></li>
+            <li><a href="pages/products.html" class="footer-link">Tất cả sneakers</a></li>
+            <li><a href="pages/products.html?category=Running" class="footer-link">Giày chạy bộ (Running)</a></li>
+            <li><a href="pages/products.html?category=Basketball" class="footer-link">Giày bóng rổ (Retro Hoops)</a></li>
+            <li><a href="pages/products.html?sale=1" class="footer-link">Sản phẩm giảm giá</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care -->
+        <div>
+          <div class="footer-col-title">Hỗ trợ khách hàng</div>
+          <ul class="footer-links">
+            <li><a href="pages/size-guide.html" class="footer-link">Hướng dẫn chọn size</a></li>
+            <li><a href="pages/shipping-returns.html" class="footer-link">Chính sách giao hàng & COD</a></li>
+            <li><a href="pages/faq.html" class="footer-link">Câu hỏi thường gặp (FAQ)</a></li>
+            <li><a href="pages/contact.html" class="footer-link">Liên hệ & Hỗ trợ</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: About & Legal -->
+        <div>
+          <div class="footer-col-title">Về SOLEVAULT</div>
+          <ul class="footer-links">
+            <li><a href="pages/about.html" class="footer-link">Câu chuyện thương hiệu</a></li>
+            <li><a href="pages/privacy.html" class="footer-link">Chính sách bảo mật demo</a></li>
+            <li><a href="pages/terms.html" class="footer-link">Điều khoản dịch vụ</a></li>
+            <li><a href="pages/wishlist.html" class="footer-link">Danh sách yêu thích</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Newsletter footer -->
+        <div class="footer-col-newsletter">
+          <div class="footer-col-title">Đăng ký nhận tin</div>
+          <p class="footer-newsletter-text">
+            Cập nhật những đợt drop sneaker và tin tức thời trang streetwear mới nhất.
+          </p>
+          <form class="footer-form">
+            <input type="email" class="footer-input" placeholder="Email của bạn..." required aria-label="Email nhận tin"/>
+            <button type="submit" class="btn btn-accent btn-sm">Gửi</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 SOLEVAULT — Premium Sneaker Store. All rights reserved.
+        </div>
+        <div class="footer-disclaimer">
+          Tuyên bố miễn trừ: Website SOLEVAULT là dự án demo frontend xây dựng bằng HTML5, CSS3 và Vanilla JavaScript thuần. Mọi thông tin sản phẩm, thương hiệu và hình ảnh được sử dụng cho mục đích trình diễn thiết kế và kiểm thử chức năng giao diện, không đại diện cho quan hệ phân phối ủy quyền chính thức.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Mount Point -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts Loaded in Strict Dependency Order -->
+  <script src="scripts/config.js"></script>
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/data.js"></script>
+  <script src="scripts/storage.js"></script>
+  <script src="scripts/products.js"></script>
+  <script src="scripts/product-detail.js"></script>
+  <script src="scripts/search.js"></script>
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/wishlist.js"></script>
+  <script src="scripts/checkout.js"></script>
+  <script src="scripts/order-success.js"></script>
+  <script src="scripts/forms.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
